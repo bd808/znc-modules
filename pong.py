@@ -99,11 +99,11 @@ class pong(znc.Module):
     CHANNEL_RE = r'{own_nick}[,:] (ping|around|yt|((are )?you)? there)[!?.]?$'
     PRIVATE_RE = r'(ping|around|yt|((are )?you )?there)[!?.]?$'
     CHANNEL_ACTION = (
-            'PRIVMSG {channel} {nick}: Please ask your question and '
+            'PRIVMSG {channel} :{nick}: Please ask your question and '
             'I will respond when I am around or maybe somebody else can help.'
         )
     PRIVATE_ACTION = (
-            'PRIVMSG {nick} Please ask your question and '
+            'PRIVMSG {nick} :Please ask your question and '
             'I will respond when I am around or maybe somebody else can help.'
         )
 
