@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import collections
 import re
 import shlex
 import time
@@ -38,7 +39,7 @@ class CmdHandler(object):
 
     def __init__(self, module):
         self._mod = module
-        self._cmds = {}
+        self._cmds = collections.OrderedDict()
         self._cmds['help'] = self._Cmd(self._cmdHelp, '', '')
 
     def _showHelp(self, name):
