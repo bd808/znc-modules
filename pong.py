@@ -23,13 +23,13 @@ import time
 import znc
 
 
-class CmdHandler:
+class CmdHandler(object):
     """Helper for ZNC OnModCommand message handling.
 
     Inspired by:
     - https://github.com/crocket/PyZeroMsgSend/blob/master/ZeroMsgSend.py
     """
-    class _Cmd:
+    class _Cmd(object):
         """A registered command."""
         def __init__(self, callback, args, desc):
             self.callback = callback
@@ -39,7 +39,7 @@ class CmdHandler:
     def __init__(self, module):
         self._mod = module
         self._cmd = {}
-        self._cmd['help'] = self._Cmd(self._cmdHelp, '', '', '')
+        self._cmd['help'] = self._Cmd(self._cmdHelp, '', '')
 
     def _showHelp(self, name):
         if name in self._cmd:
@@ -186,16 +186,12 @@ class pong(znc.Module):
 
     def _cmdStatus(self, args):
         fmt = '{:<15} : {}'
-        self._mod.PutModule(
-            fmt.format('channel_re', self._getChannelRe()))
-        self._mod.PutModule(
-            fmt.format('channel_action', self._getChannelAction()))
-        self._mod.PutModule(
-            fmt.format('private_re', self._getPrivateRe()))
-        self._mod.PutModule(
-            fmt.format('private_action', self._getPrivateAction()))
+        self.PutModule(fmt.format('channel_re', self._getChannelRe()))
+        self.PutModule(fmt.format('channel_action', self._getChannelAction()))
+        self.PutModule(fmt.format('private_re', self._getPrivateRe()))
+        self.PutModule(fmt.format('private_action', self._getPrivateAction()))
 
-    def _handleMsg(self, nick, channel, message, regex, action)
+    def _handleMsg(self, nick, channel, message, regex, action):
         subs = {
                 'nick': re.escape(nick),
                 'channel': re.escape(channel),
