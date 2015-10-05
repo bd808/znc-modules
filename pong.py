@@ -38,12 +38,12 @@ class CmdHandler(object):
 
     def __init__(self, module):
         self._mod = module
-        self._cmd = {}
-        self._cmd['help'] = self._Cmd(self._cmdHelp, '', '')
+        self._cmds = {}
+        self._cmds['help'] = self._Cmd(self._cmdHelp, '', '')
 
     def _showHelp(self, name):
-        if name in self._cmd:
-            cmd = self._cmd[name]
+        if name in self._cmds:
+            cmd = self._cmds[name]
             self._mod.PutModule('{} {}'.format(name, cmd.args))
             self._mod.PutModule(cmd.desc)
         else:
@@ -54,20 +54,20 @@ class CmdHandler(object):
             self._showHelp(args[0])
             return
 
-        for name in self._cmd.keys():
+        for name in self._cmds.keys():
             if name == 'help':
                 continue
             self._showHelp(name)
             self._mod.PutModule('------------------------------')
 
     def addCmd(self, name, callback, args, desc):
-        self._cmd[name] = self._Cmd(callback, args, desc)
+        self._cmds[name] = self._Cmd(callback, args, desc)
 
     def __call__(self, args):
         parsed = shlex.split(args)
         cmd = parsed[0]
-        if cmd in self._cmd:
-            self._cmd[cmd].method(parsed[1:])
+        if cmd in self._cmds:
+            self._cmds[cmd].method(parsed[1:])
         else:
             self._mod.PutModule('Unknown command "{}".'.format(cmd))
 
