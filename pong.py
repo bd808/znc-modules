@@ -94,7 +94,6 @@ class pong(znc.Module):
     - https://github.com/maxandersen/znc-modules/blob/master/antiping.py
     """
     description = "Ping answering machine"
-    module_types = [znc.CModInfo.UserModule]
 
     CHANNEL_RE = r'{own_nick}[,:] (ping|around|yt|((are )?you)? there)[!?.]?$'
     PRIVATE_RE = r'(ping|around|yt|((are )?you )?there)[!?.]?$'
