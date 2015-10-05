@@ -67,7 +67,7 @@ class CmdHandler(object):
         parsed = shlex.split(args)
         cmd = parsed[0]
         if cmd in self._cmds:
-            self._cmds[cmd].method(parsed[1:])
+            self._cmds[cmd].callback(parsed[1:])
         else:
             self._mod.PutModule('Unknown command "{}".'.format(cmd))
 
